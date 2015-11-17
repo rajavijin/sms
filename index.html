@@ -1,1 +1,306 @@
-hello world
+<!doctype html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <link rel="stylesheet" href="libs/assets/animate.css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="libs/assets/font-awesome/css/font-awesome.css" type="text/css" />
+    <link rel="stylesheet" href="libs/angular/angular-material/angular-material.css" type="text/css" />
+
+    
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="libs/jquery/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="styles/material-design-icons.css" type="text/css" />
+    <link rel="stylesheet" href="styles/font.css" type="text/css" />
+    <link rel="stylesheet" href="styles/app.css" type="text/css" />
+    <!-- endbuild -->
+  </head>
+  <body ng-app="inditesmsApp">
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div ng-hide-auth class="app">
+      <div ng-include="'views/login.html'" ng-controller="LoginCtrl"></div>
+    </div>
+    <div ng-show-auth class="app ng-scope">
+      <div ng-controller="AppCtrl">  <!-- aside -->
+  <!-- uiView: aside@ --><md-sidenav id="aside" class="app-aside md-sidenav-left md-closed ng-scope ng-isolate-scope" ng-class="{'folded': app.setting.asideFolded || $state.current.data.folded}" ui-view="aside@" md-component-id="aside" tabindex="-1"><div class="box bg-white ng-scope">
+  <div class="navbar md-whiteframe-z1 no-radius blue" ng-class="$state.current.data.theme ? $state.current.data.theme.primary : app.setting.theme.primary">
+      <!-- brand -->
+      <a class="navbar-brand">
+        <img src="images/greened-logo.png" alt=".">
+        <span class="hidden-folded m-l inline ng-binding">GreenEd</span>
+      </a>
+      <!-- / brand -->
+  </div>
+  <div class="box-row">
+    <div class="box-cell scrollable hover">
+      <div class="box-inner">
+        <div class="p hidden-folded blue-50" ng-class="$state.current.data.theme ? $state.current.data.theme.primary+'-50' : app.setting.theme.primary+'-50'" style="background-image:url(images/bg.png); background-size:cover">
+          <div class="rounded w-64 bg-white inline pos-rlt">
+            <img src="images/a0.jpg" class="img-responsive rounded">
+          </div>
+          <a class="block m-t-sm" ui-toggle-class="hide, show" target="#nav, #account">
+            <span class="block font-bold">{{user.name}}</span>
+            <span class="pull-right auto">
+              <i class="fa inline fa-caret-down"></i>
+              <i class="fa none fa-caret-up"></i>
+            </span>
+            {{user.name}}
+          </a>
+        </div>
+        <!-- ngInclude: 'views/aside.nav.uikit.html' --><div id="nav" ng-include="'views/aside.nav.uikit.html'" class="ng-scope"><nav ui-nav="" class="ng-scope"></div>
+        <div id="account" class="hide m-v-xs">
+          <nav>
+            <ul class="nav">
+<!--               <li>
+                <a md-ink-ripple="" ui-sref="page.profile" href="#/page/profile">
+                  <i class="icon mdi-action-perm-contact-cal i-20"></i>
+                  <span>My Profile</span>
+                </a>
+              </li>
+              <li>
+                <a md-ink-ripple="" ui-sref="page.settings" href="#/page/settings">
+                  <i class="icon mdi-action-settings i-20"></i>
+                  <span>Settings</span>
+                </a>
+              </li>
+              <li>
+                <a md-ink-ripple="" ui-sref="access.lockme" href="#/access/lockme">
+                  <i class="icon mdi-action-exit-to-app i-20"></i>
+                  <span>Logout</span>
+                </a>
+              </li>
+              <li class="m-v-sm b-b b"></li> -->
+              <li>
+                <a md-ink-ripple="" ui-fullscreen="" class="">
+                  <i class="icon mdi-navigation-fullscreen i-24"></i>
+                  <span>Fullscreen</span>
+                </a>
+              </li>
+              <li>
+                <div class="nav-item">
+                  <label class="md-check">
+                    <input type="checkbox" ng-model="app.setting.asideFolded" class="ng-pristine ng-untouched ng-valid" tabindex="0" aria-checked="false" aria-invalid="false">
+                    <i class="indigo no-icon"></i>
+                    <span class="hidden-folded">Folded aside</span>
+                  </label>
+                </div>
+              </li>
+              <li class="p p-v-sm hidden-folded">
+                <div class="m-b-sm">Theming:</div>
+                <div>
+                  <div class="pointer box pull-left m-r-sm m-b-sm" style="width:32px;height:16px" ng-click="app.setting.theme = {primary: 'indigo', accent: 'green', warn: 'amber'}" role="button" tabindex="0">
+                    <span class="indigo col-xs-4 box-col"></span>
+                    <span class="green col-xs-4 box-col"></span>
+                    <span class="amber col-xs-4 box-col"></span>
+                  </div>
+                  <div class="pointer box pull-left m-r-sm m-b-sm" style="width:32px;height:16px" ng-click="app.setting.theme = {primary: 'green', accent: 'light-green', warn: 'lime'}" role="button" tabindex="0">
+                    <span class="green col-xs-4 box-col"></span>
+                    <span class="light-green col-xs-4 box-col"></span>
+                    <span class="lime col-xs-4 box-col"></span>
+                  </div>
+                  <div class="pointer box pull-left m-r-sm m-b-sm" style="width:32px;height:16px" ng-click="app.setting.theme = {primary: 'deep-purple', accent: 'blue', warn: 'light-blue'}" role="button" tabindex="0">
+                    <span class="deep-purple col-xs-4 box-col"></span>
+                    <span class="blue col-xs-4 box-col"></span>
+                    <span class="light-blue col-xs-4 box-col"></span>
+                  </div>
+                  <div class="pointer box pull-left m-r-sm m-b-sm" style="width:32px;height:16px" ng-click="app.setting.theme = {primary: 'blue', accent: 'indigo', warn: 'amber'}" role="button" tabindex="0">
+                    <span class="blue col-xs-4 box-col"></span>
+                    <span class="indigo col-xs-4 box-col"></span>
+                    <span class="amber col-xs-4 box-col"></span>
+                  </div>
+                  <div class="pointer box pull-left m-r-sm m-b-sm" style="width:32px;height:16px" ng-click="app.setting.theme = {primary: 'cyan', accent: 'teal', warn: 'green'}" role="button" tabindex="0">
+                    <span class="cyan col-xs-4 box-col"></span>
+                    <span class="teal col-xs-4 box-col"></span>
+                    <span class="green col-xs-4 box-col"></span>
+                  </div>
+                  <div class="pointer box pull-left m-r-sm m-b-sm" style="width:32px;height:16px" ng-click="app.setting.theme = {primary: 'pink', accent: 'deep-purple', warn: 'purple'}" role="button" tabindex="0">
+                    <span class="pink col-xs-4 box-col"></span>
+                    <span class="deep-purple col-xs-4 box-col"></span>
+                    <span class="purple col-xs-4 box-col"></span>
+                  </div>
+                  <div class="pointer box pull-left m-r-sm m-b-sm" style="width:32px;height:16px" ng-click="app.setting.theme = {primary: 'blue-grey', accent: 'teal-200', warn: 'lime'}" role="button" tabindex="0">
+                    <span class="blue-grey col-xs-4 box-col"></span>
+                    <span class="teal-200 col-xs-4 box-col"></span>
+                    <span class="lime col-xs-4 box-col"></span>
+                  </div>
+                  <div class="pointer box pull-left m-r-sm m-b-sm" style="width:32px;height:16px" ng-click="app.setting.theme = {primary: 'bg-dark', accent: 'green-300', warn: 'amber-300'}" role="button" tabindex="0">
+                    <span class="bg-dark col-xs-4 box-col"></span>
+                    <span class="green-300 col-xs-4 box-col"></span>
+                    <span class="amber-300 col-xs-4 box-col"></span>
+                  </div>
+                  <div class="pointer box pull-left m-r-sm m-b-sm" style="width:32px;height:16px" ng-click="app.setting.theme = {primary: 'bg-white', accent: 'green', warn: 'teal'}" role="button" tabindex="0">
+                    <span class="bg-white col-xs-4 box-col"></span>
+                    <span class="green col-xs-4 box-col"></span>
+                    <span class="teal col-xs-4 box-col"></span>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</md-sidenav> 
+  <!-- / aside -->
+  
+  <!-- content -->
+  <!-- uiView: content@ --><div id="content" class="app-content ng-scope" role="main" ui-view="content@"><div class="box ng-scope">
+  <!-- Content Navbar -->
+  <div class="navbar md-whiteframe-z1 no-radius blue" ng-class="$state.current.data.theme ? $state.current.data.theme.primary : app.setting.theme.primary">
+    <!-- Open side - Naviation on mobile -->
+    <a md-ink-ripple="" ng-click="openAside()" ng-hide="$state.current.data.child" class="navbar-item pull-left visible-xs visible-sm" tabindex="0" aria-hidden="false"><i class="mdi-navigation-menu i-24"></i></a>
+    <!-- / -->
+    <!-- GoBack - Back to parent if $state has the param 'child' -->
+    <a md-ink-ripple="" class="navbar-item pull-left ng-hide" ng-click="goBack()" ng-show="$state.current.data.child" tabindex="0" aria-hidden="true"><i class="mdi-navigation-arrow-back i-24"></i></a>
+    <!-- / -->
+    <!-- Page title - Bind to $state's title -->
+    <div class="navbar-item pull-left h4 ng-binding">{{title}}</div>
+    <!-- / -->
+    <!-- Common tools -->
+    <ul class="nav nav-sm navbar-tool pull-right" ng-hide="$state.current.data.child" aria-hidden="false">
+<!--       <li>
+        <a md-ink-ripple="" ng-click="app.search.show = true" tabindex="0">
+          <i class="mdi-action-search i-24"></i>
+        </a>
+      </li>
+      <li>
+        <a md-ink-ripple="" data-toggle="modal" data-target="#user">
+          <i class="mdi-social-person-outline i-24"></i>
+        </a>
+      </li> -->
+      <li class="dropdown">
+        <a md-ink-ripple="" data-toggle="dropdown">
+          <i class="mdi-navigation-more-vert i-24"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-scale pull-right pull-up text-color">
+          <li><a href="">Profile</a></li>
+          <li><a href="">Settings</a></li>
+          <li class="divider"></li>
+          <li><a href="" ng-click="logout()">Logout</a></li>
+        </ul>
+      </li>
+    </ul>
+    <!-- uiView: navbar@ --><div class="pull-right ng-scope" ui-view="navbar@"></div>
+    <!-- / -->
+    <!-- Search form -->
+    <div id="search" class="pos-abt w-full h-full blue ng-hide" ng-show="app.search.show" ng-class="$state.current.data.theme ? $state.current.data.theme.primary : app.setting.theme.primary" aria-hidden="true">
+      <div class="box">
+        <div class="box-col w-56 text-center">
+          <!-- hide search form -->
+          <a md-ink-ripple="" class="navbar-item inline" ng-click="app.search.show=false; app.search.content=''" tabindex="0"><i class="mdi-navigation-arrow-back i-24"></i></a>
+        </div>
+        <div class="box-col v-m">
+          <!-- bind to app.search.content -->
+          <input class="form-control input-lg no-bg no-border ng-pristine ng-untouched ng-valid" placeholder="Search" ng-model="app.search.content" tabindex="0" aria-invalid="false">
+        </div>
+        <div class="box-col w-56 text-center">
+          <a md-ink-ripple="" class="navbar-item inline"><i class="mdi-av-mic i-24"></i></a>
+        </div>
+      </div>
+    </div>
+    <!-- / -->
+  </div>
+  <!-- Content -->
+  <div class="box-row">
+    <div class="box-cell">
+      <div class="box-inner padding"> 
+        <div ng-view></div>
+</div>
+    </div>
+  </div>
+  <!-- / -->
+</div>
+</div>
+  <!-- / content -->
+
+
+<div class="modal fade ng-scope" id="user" data-backdrop="false">
+<div class="right w-xl bg-white md-whiteframe-z2 ng-scope" ng-include="'views/aside.tpl.user.html'"> 
+</div>
+</div>
+
+<div class="modal fade ng-scope" id="chat" data-backdrop="false">
+  <div class="right w-xxl bg-white md-whiteframe-z2 ng-scope" ng-include="'views/aside.tpl.chat.html'">
+  </div>
+</div>
+</div>
+</div>
+</div>
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <script src="libs/jquery/jquery/dist/jquery.js"></script>
+    <script src="libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
+    <!-- bower:js -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0-beta.1/angular.min.js"></script>
+    <script src="scripts/firebase.js"></script>
+    <script src="scripts/angularfire.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0-beta.1/angular-animate.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0-beta.1/angular-cookies.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0-beta.1/angular-resource.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0-beta.1/angular-route.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0-beta.1/angular-sanitize.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0-beta.1/angular-touch.min.js"></script>
+    <script src="scripts/angular-csv-import.min.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+        <!-- build:js({.tmp,public}) scripts/scripts.js -->
+        <script src="libs/angular/angular-messages/angular-messages.js"></script>
+        <script src="libs/angular/angular-aria/angular-aria.js"></script>
+        <script src="libs/angular/angular-material/angular-material.js"></script>
+        <script src="libs/angular/ngstorage/ngStorage.js"></script>
+        <script src="libs/angular/angular-translate/angular-translate.js"></script>
+        <script src="libs/angular/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+        <script src="libs/angular/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
+        <script src="libs/angular/angular-translate-storage-local/angular-translate-storage-local.js"></script>
+        <script src="libs/angular/angular-ui-utils/ui-utils.js"></script>
+        <script src="libs/angular/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+        <script src="libs/angular/oclazyload/dist/ocLazyLoad.js"></script>
+        <script src="libs/angular/angular-loading-bar/build/loading-bar.js"></script>
+        <script src="libs/angular/angular-smart-table/dist/smart-table.min.js"></script>
+
+        <script src="scripts/aes.js"></script>
+
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/angularfire/config.js"></script>
+        <script src="scripts/angularfire/firebase.ref.js"></script>
+        <script src="scripts/controllers/chat.js"></script>
+        <script src="scripts/filters/reverse.js"></script>
+        <script src="scripts/angularfire/auth.js"></script>
+        <script src="scripts/controllers/login.js"></script>
+        <script src="scripts/controllers/account.js"></script>
+        <script src="scripts/directives/ngShowAuth.js"></script>
+        <script src="scripts/directives/ngHideAuth.js"></script>
+
+        <script src="scripts/config.lazyload.js"></script>
+        <script src="scripts/directives/lazyload.js"></script>
+        <script src="scripts/directives/ui-jp.js"></script>
+        <script src="scripts/directives/ui-nav.js"></script>
+        <script src="scripts/directives/ui-fullscreen.js"></script>
+        <script src="scripts/directives/ui-scroll.js"></script>
+        <script src="scripts/directives/ui-toggle.js"></script>
+        <script src="scripts/filters/fromnow.js"></script>
+        <script src="scripts/services/ngstore.js"></script>
+        <script src="scripts/services/ui-load.js"></script>
+
+        <script src="scripts/services/data.js"></script>
+        <script src="scripts/routes.js"></script>
+        <script src="scripts/controllers/compose.js"></script>
+        <script src="scripts/controllers/contacts.js"></script>
+        <script src="scripts/controllers/templates.js"></script>
+        <!-- endbuild -->
+</body>
+</html>

@@ -1,0 +1,26 @@
+<nav ui-nav>
+  <ul class="nav">
+<!--     <li class="nav-header m-v-sm hidden-folded">
+      UI Kits
+    </li> -->
+    <li ui-sref-active="active" ng-repeat="link in menus">
+      <a ng-if="!link.sub" md-ink-ripple="" ng-href="#{{link.href}}">
+        <i class="icon i-20 {{link.class}}"></i>
+        <span class="font-normal">{{link.title}}</span>
+      </a>
+      <a ng-if="link.sub" md-ink-ripple="">
+        <span class="pull-right text-muted">
+          <i class="fa fa-caret-down"></i>
+        </span>
+        <i class="pull-right up"><b class="badge no-bg">{{link.sub.length}}</b></i>
+        <i class="icon i-20 {{link.class}}"></i>
+        <span class="font-normal">{{link.title}}</span>
+      </a>
+      <ul ng-if="link.sub" class="nav nav-sub">
+        <li ui-sref-active="active" ng-repeat="sublink in link">
+          <a md-ink-ripple="" href="#{{sublink.href}}">{{sublink.title}}</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>

@@ -26,6 +26,30 @@ angular.module('inditesmsApp')
     	sendSMS: function(msgData) {
     		console.log("data", msgData);
 			var defer = $q.defer();
+
+			    // Set the Content-Type 
+			$http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+
+			// Delete the Requested With Header
+			delete $http.defaults.headers.common['X-Requested-With'];
+
+			var data = $.param({
+			json: JSON.stringify(msgData)
+			});
+
+			$http({
+			url: "//bhashsms.com/api/sendmsg.php", 
+			method: "POST", 
+			data: data
+			}).success(function(data, status) {
+			console.log("data", data);
+			console.log("status", status);
+				defer.resolve(resp);
+			},function(err) {
+				console.log("err", err);
+				defer.reject(error);
+			});
+
 			// var req = {
 			// 	method: 'POST',
 			// 	url: 'http://bhashsms.com/api/sendmsg.php',
@@ -36,11 +60,9 @@ angular.module('inditesmsApp')
 			// };
 
 			// Make the API call
-			$http.post('http://bhashsms.com/api/sendmsg.php', msgData, {withCredentials:true}).success(function(resp){
-				defer.resolve(resp);
-			}).error(function(error){
-				defer.reject(error);
-			});
+			//$http.post('http://bhashsms.com/api/sendmsg.php', msgData, {withCredentials:true}).success(function(resp){
+			//}).error(function(error){
+			//});
 			return defer.promise;
     	},
     	getMenus: function(type) {

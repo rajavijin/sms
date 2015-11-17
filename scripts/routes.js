@@ -63,7 +63,11 @@ angular.module('inditesmsApp')
 
   // configure views; whenAuthenticated adds a resolve method to ensure users authenticate
   // before trying to access that route
-  .config(['$routeProvider', function($routeProvider) {
+  .config(['$routeProvider','$httpProvider' function($routeProvider, $httpProvider) {
+    $httpProvider.defaults.headers.common = {};
+  $httpProvider.defaults.headers.post = {};
+  $httpProvider.defaults.headers.put = {};
+  $httpProvider.defaults.headers.patch = {};
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',

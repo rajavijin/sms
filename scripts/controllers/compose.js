@@ -60,8 +60,8 @@ angular.module('inditesmsApp')
       $scope.importing = true;
       console.log("finally", $scope.teacher);
       var msgData = {
-        user : "success",
-        pass : "654321",
+        user : "8951572125",
+        pass : "subin003",
         sender : "TESTTO",
         phone : $scope.teacher.phone,
         text : $scope.teacher.msg,

@@ -26,29 +26,37 @@ angular.module('inditesmsApp')
     	sendSMS: function(msgData) {
     		console.log("data", msgData);
 			var defer = $q.defer();
+			var response = function(resp) {
+				console.log("resp", resp);
+			}
 
-			    // Set the Content-Type 
-			$http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
-
+			$http.jsonp("http://bhashsms.com/api/sendmsg.php?callback=JSON_CALLBACK", {params: msgData}).success(function(data) {
+				console.log("data", data);
+				defer.resolve(data);
+			}).error(function(err, status, header, config) {
+				console.log("error", err);
+				console.log("resp", status);
+				console.log("header", header);
+				console.log("config", config);
+				defer.reject(status);
+			});
 			// Delete the Requested With Header
-			delete $http.defaults.headers.common['X-Requested-With'];
-
-			var data = $.param({
-			json: JSON.stringify(msgData)
-			});
-
-			$http({
-			url: "//bhashsms.com/api/sendmsg.php", 
-			method: "POST", 
-			data: data
-			}).success(function(data, status) {
-			console.log("data", data);
-			console.log("status", status);
-				defer.resolve(resp);
-			},function(err) {
-				console.log("err", err);
-				defer.reject(error);
-			});
+			// delete $http.defaults.headers.common['X-Requested-With'];
+			// $http({
+			// url: "http://bhashsms.com/api/sendmsg.php?user=success&pass=654321&sender=BSHSMS&text=This is a  test message&priority=ndns&stype=normal", 
+			// headers: {
+			//    'Content-Type': 'application/jsonp'
+			// },
+			// method: "POST"
+			// })
+			// .success(function(data, status) {
+			// console.log("data", data);
+			// console.log("status", status);
+			// 	defer.resolve(data);
+			// },function(err) {
+			// 	console.log("err", err);
+			// 	defer.reject(error);
+			// });
 
 			// var req = {
 			// 	method: 'POST',

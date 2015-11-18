@@ -19,10 +19,16 @@
 				  <h1>{{msg}}</h1>
 				  <button ng-if="msg != 'Creating Teacher...'" type="button" class="btn btn-info" ng-click="reset()"><i class="fa fa-user"></i> Add another contact</button>
 	         	</div> -->
-	         	<div class="form-wrapper" ng-show="importing">
+	         	<div class="form-wrapper" ng-show="importing && !smsStatus">
 					<div class="text-center m-b m-t">
 					  <p>SMS sending... Please Wait...</p>
 			          <i class="fa fa-circle-o-notch fa-spin text-lg text-info-lt"></i>
+			        </div>
+	         	</div>
+	         	<div class="form-wrapper" ng-show="smsStatus">
+					<div class="text-center m-b m-t">
+					  <p>{{statusMsg}}</p>
+			          <button type="button" class="btn btn-info" ng-click="reset()"><i class="fa fa-user"></i> Send New SMS</button>
 			        </div>
 	         	</div>
 	         	<span ng-hide="importing">
@@ -52,7 +58,7 @@
 					      </div>
 					   </div>
 	                  </div>
-	                  <button ng-show="newgroup || newmsg" ng-hide="(step == 2) && !newmsg" ng-click="next(step)" md-ink-ripple="" class="nextBtn md-btn md-fab m-b blue"><i class="mdi-navigation-arrow-forward i-24"></i><div class="md-ripple-container"></div></button>
+	                  <button ng-show="newgroup || newmsg" ng-hide="(step > 1) && !newmsg" ng-click="next(step)" md-ink-ripple="" class="nextBtn md-btn md-fab m-b blue"><i class="mdi-navigation-arrow-forward i-24"></i><div class="md-ripple-container"></div></button>
 
 	                  <button ng-show="newmsg && (step == 2)" ng-click="previous(step)" md-ink-ripple="" class="backBtn md-btn md-fab m-b blue"><i class="mdi-navigation-arrow-back i-24"></i><div class="md-ripple-container"></div></button>
 	               </form>

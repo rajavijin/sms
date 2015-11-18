@@ -23,31 +23,32 @@ angular.module('inditesmsApp')
   $scope.groups = {all:"all"};
   var allcontacts = {};
   $scope.contacts.$loaded().then(function(ccsnap) {
-  	var ci = 0;
-  	angular.forEach(ccsnap, function(cval) {
-  		if(ci == 0) {
-  			allcontacts['all'] = cval.phone;
-  		} else {
-  			allcontacts['all'] += ","+cval.phone;
-  		}
-  		if(allcontacts[cval.type]) {
-  			allcontacts[cval.type] += ","+cval.phone;
-  		} else {
-  			$scope.groups[cval.type] = cval.type;
-  			allcontacts[cval.type] = cval.phone;
-  		}
+    var ci = 0;
+    angular.forEach(ccsnap, function(cval) {
+      if(ci == 0) {
+        allcontacts['all'] = cval.phone;
+      } else {
+        allcontacts['all'] += ","+cval.phone;
+      }
+      if(allcontacts[cval.type]) {
+        allcontacts[cval.type] += ","+cval.phone;
+      } else {
+        $scope.groups[cval.type] = cval.type;
+        allcontacts[cval.type] = cval.phone;
+      }
       ci++;
     });
       console.log("All contacts", allcontacts);
   });
   var reset = function() {
     $scope.importing = false;
+    $scope.smsStatus = false;
     $rootScope.title = "Send SMS";
     $scope.msg = '';
     $scope.step = 1;
     $scope.newgroup = true;
     $scope.newmsg = true;
-    $scope.teacher = {phone:"8951572125",msg:"This is a test message"};
+    $scope.teacher = {};
     $scope.required = false;
   }
 
@@ -61,17 +62,22 @@ angular.module('inditesmsApp')
       var msgData = {
         user : "success",
         pass : "654321",
-        sender : "BSHSMS",
+        sender : "TESTTO",
         phone : $scope.teacher.phone,
         text : $scope.teacher.msg,
         priority : "ndnd",
         stype : "normal"
       }
+      //user=success&pass=654321&sender=TESTTO&phone=8951572125&text=Test%20SMS&priority=ndnd&stype=normal&callback=response").success(function(data) {
+
       console.log("msgData", msgData);
       Data.sendSMS(msgData).then(function(response) {
         console.log('response', response);
       }, function(err) {
-        console.log('error', err);
+        console.log('error MSG', err);
+        $scope.newmsg = false;
+        $scope.smsStatus = true;
+        $scope.statusMsg = "SMS sent successfully";
       });
     }
   }
@@ -87,12 +93,12 @@ angular.module('inditesmsApp')
 
   $scope.selectGroup = function(groupType) {
     $scope.teacher.type = groupType;
-  	$scope.teacher.phone = allcontacts[groupType];
-  	$scope.step++;
+    $scope.teacher.phone = allcontacts[groupType];
+    $scope.step++;
   }
   $scope.selectTemplate = function(template) {
-  	$scope.teacher.msg = template;
-  	$scope.next($scope.step);
+    $scope.teacher.msg = template;
+    $scope.next($scope.step);
   }
   function showError() {
     alert("error");
@@ -114,16 +120,16 @@ angular.module('inditesmsApp')
   }
 
   $scope.previous = function(step) {
-  	console.log("Step", step);
-  	$scope.step = step - 1;
+    console.log("Step", step);
+    $scope.step = step - 1;
   }
   $scope.createSubject = function() {
     $scope.teacher.subjects.push({subject:'',class:''});
-	}
-	$scope.removeSubject = function(index) {
-		console.log("index", index);
-  	$scope.teacher.subjects.splice(index, 1);
-	}
+  }
+  $scope.removeSubject = function(index) {
+    console.log("index", index);
+    $scope.teacher.subjects.splice(index, 1);
+  }
   $scope.reset = function() {
     $scope.msg = "";
     reset();

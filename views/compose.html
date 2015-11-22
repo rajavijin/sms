@@ -2,33 +2,25 @@
           	<div class="card row">
 	        <div class="panel-heading blue">
 		        <span ng-if="step != 3" class="label pull-right blue">{{step}}/2</span>
-		        <span ng-show="step == 1" class="label pull-right m-r-md amber">
-		        	<a ng-hide="newgroup" ng-click="teacher={};newgroup = !newgroup">New contact</a>
-		        	<a ng-show="newgroup" ng-click="newgroup = !newgroup">Existing group</a>
-		        </span>
-		        <span ng-show="step == 2" class="label pull-right m-r-md amber">
+		        <span ng-hide="type == 'homework'" ng-show="step == 1" class="label pull-right m-r-md amber">
 		        	<a ng-hide="newmsg" ng-click="newmsg = !newmsg">New Message</a>
-		        	<a ng-show="newmsg" ng-click="newmsg = !newmsg">Message Templates</a>
+		        	<a ng-show="newmsg" ng-click="newmsg = !newmsg">Choose a template</a>
 		        </span>
-	            <span class="h4" ng-if="teacher.type">{{teacher.type}}</span>
-	            <span class="h4" ng-hide="teacher.type" ng-if="teacher.phone">{{teacher.phone}}</span>
-	            <span class="h4" ng-if="teacher.msg"> / {{teacher.msg}}</span>
+	            <span class="h4" ng-if="teacher.msg">{{teacher.msg}}</span>
+	            <span class="h4" ng-if="teacher.type"> / {{teacher.type}}</span>
+	            <span class="h4" ng-hide="teacher.type" ng-if="teacher.phone"> / {{teacher.phone}}</span>
         	</div>
             <div class="card-body">
-<!-- 	         	<div class="message center" ng-if="msg != ''">
-				  <h1>{{msg}}</h1>
-				  <button ng-if="msg != 'Creating Teacher...'" type="button" class="btn btn-info" ng-click="reset()"><i class="fa fa-user"></i> Add another contact</button>
-	         	</div> -->
-	         	<div class="form-wrapper" ng-show="importing && !smsStatus">
+	         	<div class="form-wrapper" ng-if="msg != ''">
+					<div class="text-center m-b m-t">
+					  <h4>{{msg}}</h4>
+					  <button type="button" class="btn btn-info" ng-click="reset()"><i class="icon mdi-content-send"></i> Send Another SMS</button>
+			        </div>
+	         	</div>
+	         	<div class="form-wrapper" ng-show="importing">
 					<div class="text-center m-b m-t">
 					  <p>SMS sending... Please Wait...</p>
 			          <i class="fa fa-circle-o-notch fa-spin text-lg text-info-lt"></i>
-			        </div>
-	         	</div>
-	         	<div class="form-wrapper" ng-show="smsStatus">
-					<div class="text-center m-b m-t">
-					  <p>{{statusMsg}}</p>
-			          <button type="button" class="btn btn-info" ng-click="reset()"><i class="fa fa-user"></i> Send New SMS</button>
 			        </div>
 	         	</div>
 	         	<span ng-hide="importing">
@@ -37,30 +29,26 @@
 	                  <div class="form-content">
 			            <div ng-switch="step">
 					      <div ng-switch-when="1">
-							<div ng-show="newgroup" class="md-form-group col-sm-11">
-								<label class="text-info">New Contact</label>
-			                    <input type="text" ng-class="{'ng-dirty': teacher.name, 'error': (addForm.name.$error.required && addForm.name.$focused)}" class="md-input" name="name" ng-model="teacher.phone" required focus-me="true" ng-enter="next(step)" ng-focus \>
-							</div>
-							<div ng-hide="newgroup" class="md-form-group col-sm-12">
-								<label class="text-info">Select a Contact Group</label>
-								<div><button ng-click="selectGroup(k)" ng-repeat="(k, grp) in groups" md-ink-ripple="" class="md-btn m-r-xs md-raised m-b btn-fw blue">{{k}}<div class="md-ripple-container"></div></button></div>
-							</div>
-					      </div>
-					      <div ng-switch-when="2">
-							<div ng-show="newmsg" class="md-form-group col-sm-10">
+							<div ng-show="newmsg" class="md-form-group col-sm-11">
 								<label class="text-info">Message</label>
-			                    <input type="text" ng-class="{'ng-dirty': teacher.msg, 'error': (addForm.msg.$error.required && addForm.msg.$focused)}" class="md-input" name="msg" placeholder="Enter New Message.." ng-model="teacher.msg" ng-enter="next(step)" required focus-me="true" ng-focus \>
+			                    <input type="text" ng-class="{'ng-dirty': teacher.msg, 'error': (addForm.msg.$error.required && addForm.msg.$focused)}" class="md-input" name="msg" placeholder="{{msgTitle}}" ng-model="teacher.msg" ng-enter="next(step)" required focus-me="true" ng-focus \>
 							</div>
 							<div ng-hide="newmsg" class="md-form-group col-sm-12">
 								<label class="text-info">Select a Template</label>
 								<div><button ng-click="selectTemplate(template.title)" ng-repeat="(k, template) in templates" md-ink-ripple="" class="md-btn m-r-xs md-raised m-b btn-fw blue">{{template.title}}<div class="md-ripple-container"></div></button></div>
 							</div>
 					      </div>
+					      <div ng-switch-when="2">
+							<div class="md-form-group col-sm-12">
+								<label class="text-info">{{grpLabel}}</label>
+								<div><button ng-click="selectGroup(k, $event)" ng-repeat="(k, grp) in groups" md-ink-ripple="" class="md-btn m-r-xs md-raised m-b btn-fw blue">{{k}}<div class="md-ripple-container"></div></button></div>
+							</div>
+					      </div>
 					   </div>
 	                  </div>
-	                  <button ng-show="newgroup || newmsg" ng-hide="(step > 1) && !newmsg" ng-click="next(step)" md-ink-ripple="" class="nextBtn md-btn md-fab m-b blue"><i class="mdi-navigation-arrow-forward i-24"></i><div class="md-ripple-container"></div></button>
+	                  <button ng-show="(step < 3) && newmsg" ng-hide="(step == 1) && !newmsg" ng-click="next(step)" md-ink-ripple="" class="nextBtn md-btn md-fab m-b blue"><i class="mdi-navigation-arrow-forward i-24"></i><div class="md-ripple-container"></div></button>
 
-	                  <button ng-show="newmsg && (step == 2)" ng-click="previous(step)" md-ink-ripple="" class="backBtn md-btn md-fab m-b blue"><i class="mdi-navigation-arrow-back i-24"></i><div class="md-ripple-container"></div></button>
+	                  <button ng-show="(step == 2)" ng-click="previous(step)" md-ink-ripple="" class="backBtn md-btn md-fab m-b blue"><i class="mdi-navigation-arrow-back i-24"></i><div class="md-ripple-container"></div></button>
 	               </form>
 	            </div>
 	            </span>

@@ -1,0 +1,50 @@
+<div class="col-xs-12 list-data-table card">
+	<div class="panel-heading blue">
+		<span class="label pull-right blue">
+			<form>
+    			<select name="default" id="default" ng-model="defaultClass" ng-change="changeFilter(defaultClass)">
+                <option ng-repeat="(gk, gv) in groups" value="{{gk}}">{{gk}}</option>
+            	</select>
+			</form>
+        </span>
+        <span class="h4 pull-right blue">Select class: </span>
+        <span class="h4">Select a user and send SMS</span>
+	</div>
+		<table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
+		<thead>
+		<tr>
+			<th st-sort="name" st-sort-default="true">Name</th>
+			<th st-sort="phone">Phone Number</th>
+			<th width="10%">Action</th>
+		</tr>
+		<tr>
+			<th>
+				<input st-search="'name'" placeholder="search for name" class="input-sm form-control" type="search"/>
+			</th>
+			<th>
+				<input st-search="'phone'" placeholder="search for phone" class="input-sm form-control" type="search"/>
+			</th>
+			<th width="10%"></th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr st-select-row="row" st-select-mode="single" ng-repeat="row in displayedCollection">
+			<td>{{row.name}}</td>
+			<td>{{row.phone}}</td>
+			<td width="10%">
+				<button type="button" ng-click="open(row)" class="btn btn-sm btn-primary">
+					<i class="icon mdi-content-send">
+					</i> Send SMS
+				</button>
+			</td>
+		</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="5" class="text-center">
+					<div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7"></div>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+</div>

@@ -1,4 +1,17 @@
 <div class="padding-out">
+<!--   <div ng-show="templates.length" class="bg-white p-h-md md-whiteframe-z0">
+      <ul class="nav nav-md nav-lines b-info">
+        <li ui-sref-active="active">
+          <a ui-sref="app.template.list({fold:''})">All</a>
+        </li>
+        <li ui-sref-active="active">
+          <a ui-sref="app.template.list({fold:'active'})">Active <b class="badge bg-warning">{{remainingCount}}</b></a>
+        </li>
+        <li ui-sref-active="active">
+          <a ui-sref="app.template.list({fold:'completed'})">Completed <b class="badge bg-success">{{templates.length - remainingCount}}</b></a>
+        </li>
+      </ul>
+  </div> -->
   <div class="padding">
     <div>
       <form id="template-form" ng-submit="addTodo()" class="panel panel-card p-sm">

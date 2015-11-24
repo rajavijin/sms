@@ -46,9 +46,9 @@
 					      </div>
 					   </div>
 	                  </div>
-	                  <button ng-show="(step < 3) && newmsg" ng-hide="(step == 1) && !newmsg" ng-click="next(step)" md-ink-ripple="" class="nextBtn md-btn md-fab m-b blue"><i class="mdi-navigation-arrow-forward i-24"></i><div class="md-ripple-container"></div></button>
+	                  <button ng-show="step == 1" ng-hide="!newmsg" ng-click="next(step)" md-ink-ripple="" class="nextBtn md-btn md-fab m-b blue"><i class="mdi-navigation-arrow-forward i-24"></i><div class="md-ripple-container"></div></button>
 
-	                  <button ng-show="(step == 2)" ng-click="previous(step)" md-ink-ripple="" class="backBtn md-btn md-fab m-b blue"><i class="mdi-navigation-arrow-back i-24"></i><div class="md-ripple-container"></div></button>
+	                  <button ng-show="(step == 2)" ng-click="previous(step)" md-ink-ripple="" class="nextBtn md-btn md-fab m-b blue"><i class="mdi-navigation-arrow-back i-24"></i><div class="md-ripple-container"></div></button>
 	               </form>
 	            </div>
 	            </span>

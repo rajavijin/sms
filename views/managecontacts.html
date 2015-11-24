@@ -2,21 +2,13 @@
 	<div class="panel-heading blue">
 		<span class="label pull-right blue">
 			<form>
-    			<select name="defaultExam" id="defaultExam" ng-model="defaultExam" ng-change="changeExam(defaultExam)">
-                <option ng-repeat="gexam in exams[defaultClass]" value="{{gexam.title}}">{{gexam.title}}</option>
-            	</select>
-			</form>
-        </span>
-        <span class="h4 pull-right blue">Select Exam: </span>
-		<span class="label pull-right blue">
-			<form>
     			<select name="default" id="default" ng-model="defaultClass" ng-change="changeFilter(defaultClass)">
-                <option ng-repeat="gv in groups" value="{{gv.title}}">{{gv.title}}</option>
+                <option ng-repeat="(gk, gv) in groups" value="{{gk}}">{{gk}}</option>
             	</select>
 			</form>
         </span>
-        <span class="h4 pull-right blue">Select Class: </span>
-        <span class="h4">Send Marks SMS</span>
+        <span class="h4 pull-right blue">Select class: </span>
+        <span class="h4">Manage Contacts</span>
 	</div>
 		<table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
 		<thead>
@@ -36,13 +28,13 @@
 		</tr>
 		</thead>
 		<tbody>
-		<tr ng-class="{'selected': row[filterKey]}" ng-repeat="row in displayedCollection">
+		<tr ng-repeat="row in displayedCollection">
 			<td>{{row.name}}</td>
 			<td>{{row.phone}}</td>
 			<td width="10%">
-				<button type="button" ng-click="open(row)" class="btn btn-sm btn-primary">
-					<i class="icon mdi-content-send">
-					</i> Send Marks SMS
+				<button type="button" ng-click="removeItem(row)" class="btn btn-sm btn-danger">
+					<i class="icon mdi-action-delete">
+					</i> Delete
 				</button>
 			</td>
 		</tr>

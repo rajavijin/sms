@@ -2,12 +2,12 @@
   <div class="padding">
     <div>
       <form id="template-form" ng-submit="addTodo()" class="panel panel-card p-sm">
-        <input placeholder="Enter New Template Here..." ng-model="newTodo" autofocus class="form-control input-lg no-border no-bg">
+        <input placeholder="Enter New Exam Here..." ng-model="newTodo" autofocus class="form-control input-lg no-border no-bg">
       </form>
     </div>
     <div ng-show="templates.length">
       <div class="m-b-md">
-        <div ng-repeat="template in templates | filter:app.search.content | filter:statusFilter | orderBy:'id':true  track by $index" ng-class="{completed: template.completed, editing: template == editedTodo}" class="card p m-b-xs">
+        <div ng-repeat="template in templates" ng-class="{completed: template.completed, editing: template == editedTodo}" class="card p m-b-xs">
           <div ng-hide="template.editedTodo">
             <div class="dropdown card-tools">
               <button md-ink-ripple data-toggle="dropdown" class="md-btn md-flat md-btn-circle">
@@ -33,7 +33,7 @@
           <i class="mdi-action-done-all text-2x text-white"></i>
         </span>
         <h3 class="font-thin">
-          Create your first template!
+          Create your first exam!
         </h3>
       </div>
     </div>

@@ -1,15 +1,7 @@
 		<div class="col-xs-12 add-data">
           	<div class="card row">
 	        <div class="panel-heading blue" ng-hide="import">
-		        <span class="label pull-right m-r-md blue">{{step}}/3</span>
-		        <span class="label pull-right m-r-md amber">
-		        	<a ng-hide="list" ng-click="list = !list">View Contacts</a>
-		        	<a ng-show="list" ng-click="list = !list">Hide Contacts</a>
-		        </span>
-		        <span ng-show="step == 1" class="label pull-right m-r-md amber">
-		        	<a ng-hide="newgroup" ng-click="contacttype('new')">New group</a>
-		        	<a ng-show="newgroup" ng-click="contacttype('existing')">Groups</a>
-		        </span>
+		        <span class="label pull-right m-r-sm blue">{{step}}/3</span>
 	            <span class="h4" ng-if="teacher.type">{{teacher.type}}</span>
 	            <span class="h4" ng-if="teacher.name"> / {{teacher.name}}</span>
 	            <span class="h4" ng-if="teacher.phone"> / {{teacher.phone}}</span>
@@ -17,12 +9,8 @@
         	</div>
 	        <div class="panel-heading blue" ng-show="import">
 	            <span class="h4"></span>
-	            <span class="label pull-right m-r-md amber">
-		        	<a ng-hide="list" ng-click="list = !list">View Contacts</a>
-		        	<a ng-show="list" ng-click="list = !list">Hide Contacts</a>
-		        </span>
 	        </div>
-        	<div class="card-tools">
+        	<!-- <div class="card-tools">
               <ul class="list-inline">
                 <li class="dropdown">
                   <a md-ink-ripple="" data-toggle="dropdown" class="md-btn md-flat md-btn-circle">
@@ -34,7 +22,7 @@
                   </ul>
                 </li>
               </ul>
-            </div>
+            </div> -->
             <div class="card-body">
 	         	<div class="form-wrapper" ng-show="import"><br>
 					<form role="form" ng-submit="csvImport(csv.result)" ng-hide="importing">
@@ -49,9 +37,11 @@
 						<button ng-if="importMsg == 'Import completed successfully.'" type="button" class="btn btn-info" ng-click="importTeachers()"><i class="fa fa-download"></i> Import next sheet</button>
 					</div>
 	         	</div>
-	         	<div class="message center" ng-if="msg != ''">
-				  <h1>{{msg}}</h1>
-				  <button ng-if="msg != 'Creating Teacher...'" type="button" class="btn btn-info" ng-click="reset()"><i class="fa fa-user"></i> Add another contact</button>
+	         	<div class="form-wrapper" ng-if="msg != ''">
+					<div class="text-center m-b m-t">
+					  <h4>{{msg}}</h4>
+					  <button type="button" class="btn btn-info" ng-click="reset()"><i class="icon mdi-communication-quick-contacts-dialer"></i> Add another contact</button>
+			        </div>
 	         	</div>
 
 	         	<span ng-if="msg == ''" ng-hide="import">
@@ -60,13 +50,9 @@
 	                  <div class="form-content">
 			            <div ng-switch="step">
 					      <div ng-switch-when="1">
-							<div ng-show="newgroup" class="md-form-group col-sm-11">
-								<label class="text-info">New Contact Group</label>
-			                    <input type="text" ng-class="{'ng-dirty': teacher.name, 'error': (addForm.name.$error.required && addForm.name.$focused)}" class="md-input" name="name" ng-model="teacher.type" required focus-me="true" ng-enter="next(step)" ng-focus \>
-							</div>
-							<div ng-hide="newgroup" class="md-form-group col-sm-11">
-								<label class="text-info">Select a Contact Group</label>
-								<div><button ng-click="selectGroup(k)" ng-repeat="(k, grp) in groups" md-ink-ripple="" class="md-btn m-r-xs md-raised m-b btn-fw blue">{{k}}<div class="md-ripple-container"></div></button></div>
+							<div class="md-form-group col-sm-12">
+								<h5 class="text-info">Select a Contact Group</h5>
+								<div><button ng-click="selectGroup(grp.title)" ng-repeat="(k, grp) in groups" md-ink-ripple="" class="md-btn m-r-xs md-raised m-b btn-fw blue">{{grp.title}}<div class="md-ripple-container"></div></button></div>
 							</div>
 					      </div>
 					      <div ng-switch-when="2">
@@ -74,9 +60,9 @@
 								<label class="text-info">Name and Phone</label>
 			                    <div class="row">
 								  <div class="col-md-6">
-								  	<input placeholder="Name" class="md-input" ng-model="teacher.name" type="text" required focus-me="true" ng-focus \>
+								  	<input placeholder="Name" class="md-input" ng-model="teacher.name" type="text" required focus-me="true" ng-focus only-alpha \>
 								  </div>
-								  <div class="col-md-5"><input placeholder="Phone" class="md-input" ng-model="teacher.phone" type="text"></div>
+								  <div class="col-md-5"><input placeholder="Phone" class="md-input" ng-model="teacher.phone" type="text" required only-digits></div>
 								</div>
 		                        <div role="alert">
 							      <span class="error" ng-show="addForm.name.$error.required && addForm.name.$focused"><small>Required</small></span>
@@ -98,11 +84,9 @@
 					      </div>
 					   </div>
 	                  </div>
-	                  <button ng-hide="!newgroup && (step == 1)" ng-click="next(step)" md-ink-ripple="" class="nextBtn md-btn md-fab m-b blue"><i class="mdi-navigation-arrow-forward i-24"></i><div class="md-ripple-container"></div></button>
+	                  <button ng-hide="step == 1" ng-click="next(step)" md-ink-ripple="" class="nextBtn md-btn md-fab m-b blue"><i class="mdi-navigation-arrow-forward i-24"></i><div class="md-ripple-container"></div></button>
 
 	                  <button ng-hide="step == 1" ng-click="previous(step)" md-ink-ripple="" class="backBtn md-btn md-fab m-b blue"><i class="mdi-navigation-arrow-back i-24"></i><div class="md-ripple-container"></div></button>
-	                  <!-- 
-	                  <button ng-if="step != 1" id="backBtn" class="btn pull-right m-r-lg btn-icon data-submit btn-rounded btn-info" ng-click="previous(step)"><i class="fa  fa-arrow-left"></i></button> -->
 	               </form>
 	            </div>
 	            </span>
@@ -110,7 +94,7 @@
           </div>
         </div>
 
-<div ng-if="list" class="col-xs-12 list-data-table card">
+<!-- <div ng-if="list" class="col-xs-12 list-data-table card">
 	<div class="panel-heading blue">
 		        <span class="label pull-right blue">
 		        	<form class="head-input">
@@ -159,4 +143,4 @@
 			</tr>
 		</tfoot>
 	</table>
-  </div>
+  </div> -->

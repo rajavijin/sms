@@ -34,7 +34,7 @@
 			                    <input type="text" ng-class="{'ng-dirty': teacher.msg, 'error': (addForm.msg.$error.required && addForm.msg.$focused)}" class="md-input" name="msg" placeholder="{{msgTitle}}" ng-model="teacher.msg" ng-enter="next(step)" required focus-me="true" ng-focus \>
 							</div>
 							<div ng-hide="newmsg" class="md-form-group col-sm-12">
-								<label class="text-info">Select a Template</label>
+								<h5 class="text-info">Select a Template</h5>
 								<div><button ng-click="selectTemplate(template.title)" ng-repeat="(k, template) in templates" md-ink-ripple="" class="md-btn m-r-xs md-raised m-b btn-fw blue">{{template.title}}<div class="md-ripple-container"></div></button></div>
 							</div>
 					      </div>

@@ -1,6 +1,6 @@
 <div class="col-xs-12 list-data-table card">
 	<div class="panel-heading blue">
-		<span class="label pull-right blue">
+		<span class="m-l-sm pull-right blue">
 			<form>
     			<select name="defaultExam" id="defaultExam" ng-model="defaultExam" ng-change="changeExam(defaultExam)">
                 <option ng-repeat="gexam in exams[defaultClass]" value="{{gexam.title}}">{{gexam.title}}</option>
@@ -8,7 +8,7 @@
 			</form>
         </span>
         <span class="h4 pull-right blue">Select Exam: </span>
-		<span class="label pull-right blue">
+		<span class="m-l-sm m-r-lg pull-right blue">
 			<form>
     			<select name="default" id="default" ng-model="defaultClass" ng-change="changeFilter(defaultClass)">
                 <option ng-repeat="gv in groups" value="{{gv.title}}">{{gv.title}}</option>

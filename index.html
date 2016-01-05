@@ -208,6 +208,7 @@
   </div>
   <!-- / -->
 </div>
+<iframe src="https://www.opened.com/search" width="100%" height="100%"></iframe>
 </div>
   <!-- / content -->
 
@@ -231,5 +232,13 @@
 
         <script src="scripts/angular-material.js"></script>
         <script src="scripts/scripts.be369833.js"></script>
+          <script type="text/javascript">
+    $(document).ready(function() {
+      $('iframe').load( function() {
+          $('iframe').contents().find('header.navbar').css('display','none');
+          $('iframe').contents().find('header.navbar.navbar-static-top').css('display','none !important');
+      });
+    }); 
+  </script>
 </body>
 </html>

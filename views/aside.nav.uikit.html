@@ -17,7 +17,7 @@
         <span class="font-normal">{{link.title}}</span>
       </a>
       <ul ng-if="link.sub" class="nav nav-sub">
-        <li ui-sref-active="active" ng-repeat="sublink in link">
+        <li ui-sref-active="active" ng-repeat="sublink in link.sub">
           <a md-ink-ripple="" href="#{{sublink.href}}">{{sublink.title}}</a>
         </li>
       </ul>

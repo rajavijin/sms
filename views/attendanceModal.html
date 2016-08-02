@@ -1,10 +1,10 @@
 <div class="modal-header">
     <h3 class="modal-title">Are You Sure ?</h3>
 </div>
-<div ng-hide="sending" ng-show="users.length > 0" class="modal-body">
-    <p>You want to send SMS to "{{usernames}}" with "{{msg.text}}"</p>
+<div ng-hide="sending" ng-show="msg.phone.length > 0" class="modal-body">
+    <p>You want to send absent SMS to "{{usernames}}"</p>
 </div>
-<div ng-hide="users.length > 0" class="modal-body">
+<div ng-hide="msg.phone.length > 0" class="modal-body">
     <p>Please select a user to send SMS</p>
 </div>
 <div class="form-wrapper" ng-show="sending">
@@ -14,11 +14,11 @@
 	</div>
 </div>
 <div class="modal-footer">
-<div ng-hide="users.length > 0">
+<div ng-hide="msg.phone.length > 0">
     <button class="btn btn-info" ng-click="cancel()">Ok</button>
 </div>
-<div ng-show="users.length > 0">
+<div ng-show="msg.phone.length > 0">
     <button class="btn btn-default" ng-click="cancel()">No</button>
     <button class="btn btn-info" ng-click="ok()">Yes</button>
-</div>                
+</div>
 </div>

@@ -2,7 +2,7 @@
           	<div class="card row">
 	        <div class="panel-heading blue">
 		        <span ng-if="step != 3" class="label pull-right blue">{{step}}/2</span>
-		        <span ng-hide="type == 'homework'" ng-show="step == 1" class="label pull-right m-r-md amber">
+		        <span ng-show="(step == 1) && (type != 'homework')" class="label pull-right m-r-md amber">
 		        	<a ng-hide="newmsg" ng-click="newmsg = !newmsg">New Message</a>
 		        	<a ng-show="newmsg" ng-click="newmsg = !newmsg">Choose a template</a>
 		        </span>
@@ -12,9 +12,9 @@
         	</div>
             <div class="card-body">
 	         	<div class="form-wrapper" ng-if="msg != ''">
-					<div class="text-center m-b m-t">
-					  <h4>{{msg}}</h4>
-					  <button type="button" class="btn btn-info" ng-click="reset()"><i class="icon mdi-content-send"></i> Send Another SMS</button>
+							<div class="text-center m-b m-t">
+					  	<h4>{{msg}}</h4>
+					  	<button type="button" class="btn btn-info" ng-click="reset()"><i class="icon mdi-content-send"></i> Send Another SMS</button>
 			        </div>
 	         	</div>
 	         	<div class="form-wrapper" ng-show="importing">
@@ -25,13 +25,14 @@
 	         	</div>
 	         	<span ng-hide="importing">
 	            <div class="form-wrapper">
-	               <form name="addForm">
+	               <form name="addForm" novalidate>
 	                  <div class="form-content">
 			            <div ng-switch="step">
 					      <div ng-switch-when="1">
 							<div ng-show="newmsg" class="md-form-group col-sm-11">
 								<label class="text-info">Message</label>
-			                    <input type="text" ng-class="{'ng-dirty': teacher.msg, 'error': (addForm.msg.$error.required && addForm.msg.$focused)}" class="md-input" name="msg" placeholder="{{msgTitle}}" ng-model="teacher.msg" ng-enter="next(step)" required focus-me="true" ng-focus \>
+			                    <input type="text" class="md-input" name="msg" placeholder="{{msgTitle}}" ng-model="teacher.msg" ng-enter="next(step)" focus-me="true" required \>
+
 							</div>
 							<div ng-hide="newmsg" class="md-form-group col-sm-12">
 								<h5 class="text-info">Select a Template</h5>
@@ -39,9 +40,11 @@
 							</div>
 					      </div>
 					      <div ng-switch-when="2">
-							<div class="md-form-group col-sm-12">
+							<div class="md-form-group col-sm-12" ng-if="msg == ''">
 								<label class="text-info">{{grpLabel}}</label>
-								<div><button ng-click="selectGroup(k, $event)" ng-repeat="(k, grp) in groups" md-ink-ripple="" class="md-btn m-r-xs md-raised m-b btn-fw blue">{{k}}<div class="md-ripple-container"></div></button></div>
+								<div>
+									<button ng-click="selectGroup(k, $event)" ng-repeat="(k, grp) in groups" md-ink-ripple="" class="md-btn m-r-xs md-raised m-b btn-fw blue">{{k}}<div class="md-ripple-container"></div></button>
+								</div>
 							</div>
 					      </div>
 					   </div>
@@ -55,54 +58,3 @@
 	         </div>
           </div>
         </div>
-<!-- 
-<div ng-if="list" class="col-xs-12 list-data-table card">
-	<div class="panel-heading blue">
-		        <span class="label pull-right blue">
-		        	<form class="head-input">
-        			<input class="input-sm form-control" name="items" id="items" type="number" ng-model="itemsByPage" >
-      				</form>
-		        </span>
-		        <span class="label pull-right blue">items by page: </span>
-	            <span class="h4">All Contacts</span>
-        	</div>
-		<table st-table="displayedCollection" st-safe-src="contacts" class="table table-striped">
-		<thead>
-		<tr>
-			<th st-sort="type">Group</th>
-			<th st-sort="name">Name</th>
-			<th st-sort="phone">Phone Number</th>
-			<th>Action</th>
-		</tr>
-		<tr>
-			<th>
-				<input st-search="'type'" placeholder="search for group" class="input-sm form-control" type="search"/>
-			</th>
-			<th>
-				<input st-search="'name'" placeholder="search for name" class="input-sm form-control" type="search"/>
-			</th>
-			<th>
-				<input st-search="'phone'" placeholder="search for phone" class="input-sm form-control" type="search"/>
-			</th>
-			<th></th>
-		</tr>
-		</thead>
-		<tbody>
-		<tr ng-repeat="row in displayedCollection | orderBy:['-created']">
-			<td>{{row.type}}</td>
-			<td>{{row.name}}</td>
-			<td>{{row.phone}}</td>
-			<td><button type="button" ng-click="removeItem(row)" class="btn btn-sm btn-danger">
-				<i class="glyphicon glyphicon-remove-circle"></i>
-			</button></td>
-		</tr>
-		</tbody>
-		<tfoot>
-			<tr>
-				<td colspan="5" class="text-center">
-					<div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7"></div>
-				</td>
-			</tr>
-		</tfoot>
-	</table>
-  </div> -->

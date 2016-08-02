@@ -1,11 +1,11 @@
 		<div class="col-xs-12 add-data">
           	<div class="card row">
 	        <div class="panel-heading blue" ng-hide="import">
-		        <span class="label pull-right m-r-sm blue">{{step}}/3</span>
+		        <span class="label pull-right m-r-sm blue">{{step}}/2</span>
 	            <span class="h4" ng-if="teacher.type">{{teacher.type}}</span>
 	            <span class="h4" ng-if="teacher.name"> / {{teacher.name}}</span>
 	            <span class="h4" ng-if="teacher.phone"> / {{teacher.phone}}</span>
-	            <span class="h4" ng-repeat="(sk, sv) in teacher.subjects" ng-if="teacher.subjects.length > 1"> / {{sv.subject}}</span>
+	            <!--<span class="h4" ng-repeat="(sk, sv) in teacher.subjects" ng-if="teacher.subjects.length > 1"> / {{sv.subject}}</span>-->
         	</div>
 	        <div class="panel-heading blue" ng-show="import">
 	            <span class="h4"></span>
@@ -46,13 +46,16 @@
 
 	         	<span ng-if="msg == ''" ng-hide="import">
 	            <div class="form-wrapper">
-	               <form name="addForm">
+	               <form name="addForm" novalidate>
 	                  <div class="form-content">
 			            <div ng-switch="step">
 					      <div ng-switch-when="1">
 							<div class="md-form-group col-sm-12">
 								<h5 class="text-info">Select a Contact Group</h5>
-								<div><button ng-click="selectGroup(grp.title)" ng-repeat="(k, grp) in groups" md-ink-ripple="" class="md-btn m-r-xs md-raised m-b btn-fw blue">{{grp.title}}<div class="md-ripple-container"></div></button></div>
+								<div>
+									<button ng-click="selectGroup({title: 'teachers'})" md-ink-ripple="" class="md-btn m-r-xs md-raised m-b btn-fw blue">Teachers<div class="md-ripple-container"></div></button>
+									<button ng-click="selectGroup(v)" ng-repeat="(k, v) in groups" md-ink-ripple="" class="md-btn m-r-xs md-raised m-b btn-fw blue">{{v.title}}<div class="md-ripple-container"></div></button>
+								</div>
 							</div>
 					      </div>
 					      <div ng-switch-when="2">
@@ -69,24 +72,24 @@
 							    </div>
 							</div>
 					      </div>
-					      <div ng-switch-when="3">
-		                  	<div class="md-form-group col-sm-10">
-		                        <label class="text-info">Subjects</label>
-								<div class="row" ng-repeat="(k,v) in teacher.subjects">
-								  <div class="col-md-1">
-								  	<button ng-click="(k == 0) ? createSubject(): removeSubject(k)" class="btn custom-add-icon btn-default"><i class="fbtn ibtn fa" ng-class="{ 'fa-plus' : k == 0, 'fa-trash' : k !== 0}"></i></button>
-								  	</div>
-								  <div class="col-md-11">
-								  	<input class="md-input" placeholder="Enter subject" ng-model="teacher.subjects[k].subject" type="text" required focus-me="true" ng-focus \>
-								  </div>
+						<!--<div ng-switch-when="3">
+							<div class="md-form-group col-sm-10">
+									<label class="text-info">Subjects</label>
+									<div class="row" ng-repeat="(k,v) in teacher.subjects">
+										<div class="col-md-1">
+											<button ng-click="(k == 0) ? createSubject(): removeSubject(k)" class="btn custom-add-icon btn-default"><i class="fbtn ibtn fa" ng-class="{ 'fa-plus' : k == 0, 'fa-trash' : k !== 0}"></i></button>
+										</div>
+										<div class="col-md-11">
+											<input class="md-input" placeholder="Enter subject" ng-model="teacher.subjects[k].subject" type="text" required focus-me="true" ng-focus \>
+										</div>
+									</div>
 								</div>
-		                    </div>
-					      </div>
-					   </div>
+							</div>-->
+						</div>
 	                  </div>
 	                  <button ng-hide="step == 1" ng-click="next(step)" md-ink-ripple="" class="nextBtn md-btn md-fab m-b blue"><i class="mdi-navigation-arrow-forward i-24"></i><div class="md-ripple-container"></div></button>
 
-	                  <button ng-hide="step == 1" ng-click="previous(step)" md-ink-ripple="" class="backBtn md-btn md-fab m-b blue"><i class="mdi-navigation-arrow-back i-24"></i><div class="md-ripple-container"></div></button>
+	                <button ng-hide="step == 1" ng-click="previous(step)" md-ink-ripple="" class="backBtn md-btn md-fab m-b blue"><i class="mdi-navigation-arrow-back i-24"></i><div class="md-ripple-container"></div></button>
 	               </form>
 	            </div>
 	            </span>

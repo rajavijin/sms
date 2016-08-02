@@ -7,7 +7,7 @@
             	</select>
 			</form>
         </span>
-        <span class="h4 pull-right blue">Select class: </span>
+        <span class="h4 pull-right blue">Select group: </span>
         <span class="h4">Manage Contacts</span>
 	</div>
 		<table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
@@ -31,8 +31,12 @@
 		<tr ng-repeat="row in displayedCollection">
 			<td>{{row.name}}</td>
 			<td>{{row.phone}}</td>
-			<td width="10%">
-				<button type="button" ng-click="removeItem(row)" class="btn btn-sm btn-danger">
+			<td width="20%">
+				<button type="button" ng-click="open(row)" class="btn btn-sm btn-danger">
+					<i class="icon mdi-action-delete">
+					</i> Edit
+				</button>
+				<button type="button" ng-click="removeItem(row, $event)" class="btn btn-sm btn-danger">
 					<i class="icon mdi-action-delete">
 					</i> Delete
 				</button>

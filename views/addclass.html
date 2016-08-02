@@ -1,0 +1,46 @@
+<div class="col-sm-12">
+  <div name="forma" class="form-horizontal"  novalidate>
+    <div class="panel panel-default">
+      <div class="panel-heading bg-white">
+        <strong>Add New Class</strong>
+      </div>
+      <div class="panel-body">
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Class</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="Enter class" ng-model="newclass.title" required >
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Subjects</label>
+          <div class="col-sm-10">
+            <div class="row" ng-repeat="(k,v) in newclass.subjects">
+              <div class="col-md-11">
+                <input class="md-input" placeholder="Enter subject" ng-model="newclass.subjects[k].subject" type="text" required focus-me="true" ng-focus \>
+              </div>
+              <div class="col-md-1">
+                <button ng-click="(k == 0) ? createSubject(): removeSubject(k)" class="btn custom-add-icon btn-default"><i class="fbtn ibtn fa" ng-class="{ 'fa-plus' : k == 0, 'fa-trash' : k !== 0}"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Exams</label>
+          <div class="col-sm-10">
+            <div class="row" ng-repeat="(ek,ev) in newclass.exams">
+              <div class="col-md-11">
+                <input class="md-input" placeholder="Enter exam" ng-model="newclass.exams[ek].title" type="text" required focus-me="true" ng-focus \>
+              </div>
+              <div class="col-md-1">
+                <button ng-click="(ek == 0) ? createExam(): removeExam(ek)" class="btn custom-add-icon btn-default"><i class="fbtn ibtn fa" ng-class="{ 'fa-plus' : ek == 0, 'fa-trash' : ek !== 0}"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="panel-footer text-right">
+        <button type="submit" class="btn btn-info" ng-click="save(newclass)">Create Class</button>
+      </footer>
+    </div>
+  </div>
+</div>

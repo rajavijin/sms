@@ -1,0 +1,64 @@
+<div class="col-xs-12 list-data-table card">
+	<div class="panel-heading blue">
+		<span class="m-l-sm pull-right blue">
+			<!-- <form>
+    			<select name="default" id="default" ng-model="defaultClass" ng-change="changeFilter(defaultClass)">
+                <option ng-repeat="(gk, gv) in groups" value="{{gk}}">{{gk}}</option>
+            	</select>
+			</form> -->
+        </span>
+        <span class="h4 pull-right blue">
+          <a type="button" href="#/classes/add" class="btn btn-sm btn-primary">
+            <i class="icon mdi-content-add">
+            </i> Add New Class
+          </a>
+        </span>
+        <span class="h4">Manage Classes</span>
+	</div>
+		<table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
+		<thead>
+		<tr>
+			<th st-sort="title" st-sort-default="true">Class Name</th>
+			<th>Subjects</th>
+			<th>Exams</th>
+			<th width="20%">Action</th>
+		</tr>
+		<tr>
+			<th>
+				<input st-search="'title'" placeholder="search for name" class="input-sm form-control" type="search"/>
+			</th>
+			<th>
+				<!-- <input st-search="'subjects'" placeholder="search for phone" class="input-sm form-control" type="search"/> -->
+			</th>
+			<th>
+				<!-- <input st-search="'exams'" placeholder="search for exams" class="input-sm form-control" type="search"/> -->
+			</th>
+			<th width="20%"></th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr ng-repeat="row in displayedCollection">
+			<td>{{row.title}}</td>
+			<td><span ng-repeat="(s, subject) in row.subjects">{{(s == 0) ? subject.subject : ', '+ subject.subject}}</span></td>
+			<td><span ng-repeat="(e, exam) in row.exams">{{(e == 0) ? exam.title : ', '+ exam.title}}</span></td>
+			<td width="20%">
+				<button type="button" ng-click="editItem(row)" class="btn btn-sm btn-danger">
+					<i class="icon mdi-action-delete">
+					</i> Edit
+				</button>
+				<button type="button" ng-click="removeItem(row, $event)" class="btn btn-sm btn-danger">
+					<i class="icon mdi-action-delete">
+					</i> Delete
+				</button>
+			</td>
+		</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="5" class="text-center">
+					<div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7"></div>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+</div>

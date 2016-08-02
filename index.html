@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="styles/angular-material.css" type="text/css" />
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-    <link rel="stylesheet" href="styles/main.8da552d8.css">
+    <link rel="stylesheet" href="styles/main.4b3a5b2d.css">
   </head>
   <body ng-app="inditesmsApp">
     <!--[if lt IE 7]>
@@ -27,7 +27,7 @@
       <!-- brand -->
       <a class="navbar-brand">
         <img src="images/greened-logo.png" alt=".">
-        <span class="hidden-folded m-l inline ng-binding">GreenEd</span>
+        <span class="hidden-folded m-l inline ng-binding"></span>
       </a>
       <!-- / brand -->
   </div>
@@ -36,9 +36,9 @@
       <div class="box-inner">
         <div class="p hidden-folded blue-50" ng-class="$state.current.data.theme ? $state.current.data.theme.primary+'-50' : app.setting.theme.primary+'-50'" style="background-image:url(images/bg.png); background-size:cover">
           <div class="rounded w-64 bg-white inline pos-rlt">
-            <img src="images/a0.jpg" class="img-responsive rounded">
+            <img src="images/school-icon.jpg" class="img-responsive rounded">
           </div>
-          <a class="block m-t-sm pull-right" ui-toggle-class="hide, show" target="#nav, #account">
+          <a class="block m-t-sm" ui-toggle-class="hide, show" target="#nav, #account">
             <span class="block font-bold">{{user.name}}</span>
             {{user.address}}
           </a>
@@ -138,9 +138,9 @@
     </div>
   </div>
 </div>
-</md-sidenav> 
+</md-sidenav>
   <!-- / aside -->
-  
+
   <!-- content -->
   <!-- uiView: content@ --><div id="content" class="app-content ng-scope" role="main" ui-view="content@"><div class="box ng-scope">
   <!-- Content Navbar -->
@@ -201,7 +201,7 @@
   <!-- Content -->
   <div class="box-row">
     <div class="box-cell">
-      <div class="box-inner padding"> 
+      <div class="box-inner padding">
         <div ng-view></div>
 </div>
     </div>
@@ -212,9 +212,9 @@
   <!-- / content -->
 
 
-<div class="modal fade ng-scope" id="user" data-backdrop="false">
-<div class="right w-xl bg-white md-whiteframe-z2 ng-scope" ng-include="'views/aside.tpl.user.html'"> 
-</div>
+<!-- <div class="modal fade ng-scope" id="user" data-backdrop="false">
+<div class="right w-xl bg-white md-whiteframe-z2 ng-scope" ng-include="'views/aside.tpl.user.html'">
+</div> -->
 </div>
 
 <div class="modal fade ng-scope" id="chat" data-backdrop="false">
@@ -227,9 +227,9 @@
 
     <script src="scripts/jquery.js"></script>
     <script src="scripts/bootstrap.min.js"></script>
-    <script src="scripts/vendor.506b8007.js"></script>
+    <script src="scripts/vendor.5431b545.js"></script>
 
         <script src="scripts/angular-material.js"></script>
-        <script src="scripts/scripts.be369833.js"></script>
+        <script src="scripts/scripts.b3e2915f.js"></script>
 </body>
 </html>

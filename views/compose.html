@@ -6,6 +6,7 @@
 		        	<a ng-hide="newmsg" ng-click="newmsg = !newmsg">New Message</a>
 		        	<a ng-show="newmsg" ng-click="newmsg = !newmsg">Choose a template</a>
 		        </span>
+
 	            <span class="h4" ng-if="teacher.msg">{{teacher.msg}}</span>
 	            <span class="h4" ng-if="teacher.type"> / {{teacher.type}}</span>
 	            <span class="h4" ng-hide="teacher.type" ng-if="teacher.phone"> / {{teacher.phone}}</span>
@@ -32,7 +33,7 @@
 							<div ng-show="newmsg" class="md-form-group col-sm-11">
 								<label class="text-info">Message</label>
 			                    <input type="text" class="md-input" name="msg" placeholder="{{msgTitle}}" ng-model="teacher.msg" ng-enter="next(step)" focus-me="true" required \>
-
+                          <br><br><span class=" label blue">({{teacher.msg.length ? teacher.msg.length : 0}}/{{teacher.msg.length ? (160* totalMsg((160 + teacher.msg.length)/160)) : 160}}) - Count : {{teacher.msg.length ? totalMsg((160 + teacher.msg.length)/160) : 1}}</span>
 							</div>
 							<div ng-hide="newmsg" class="md-form-group col-sm-12">
 								<h5 class="text-info">Select a Template</h5>

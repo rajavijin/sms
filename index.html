@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="styles/angular-material.css" type="text/css" />
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-    <link rel="stylesheet" href="styles/main.4b3a5b2d.css">
+    <link rel="stylesheet" href="styles/main.css">
   </head>
   <body ng-app="inditesmsApp">
     <!--[if lt IE 7]>
@@ -36,7 +36,7 @@
       <div class="box-inner">
         <div class="p hidden-folded blue-50" ng-class="$state.current.data.theme ? $state.current.data.theme.primary+'-50' : app.setting.theme.primary+'-50'" style="background-image:url(images/bg.png); background-size:cover">
           <div class="rounded w-64 bg-white inline pos-rlt">
-            <img src="images/school-icon.jpg" class="img-responsive rounded">
+            <img src="{{user.logo}}" class="img-responsive rounded" onerror="this.src = 'images/school-icon.jpg'">
           </div>
           <a class="block m-t-sm" ui-toggle-class="hide, show" target="#nav, #account">
             <span class="block font-bold">{{user.name}}</span>
@@ -171,9 +171,9 @@
           <i class="mdi-navigation-more-vert i-24"></i>
         </a>
         <ul class="dropdown-menu dropdown-menu-scale pull-right pull-up text-color">
-          <li><a href="">Profile</a></li>
+          <!--<li><a href="">Profile</a></li>
           <li><a href="">Settings</a></li>
-          <li class="divider"></li>
+          <li class="divider"></li>-->
           <li><a href="" ng-click="logout()">Logout</a></li>
         </ul>
       </li>
@@ -230,6 +230,6 @@
     <script src="scripts/vendor.5431b545.js"></script>
 
         <script src="scripts/angular-material.js"></script>
-        <script src="scripts/scripts.6741a1e4.js"></script>
+        <script src="scripts/scripts.fc76cb9b.js"></script>
 </body>
 </html>

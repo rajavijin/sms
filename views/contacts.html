@@ -53,7 +53,7 @@
 							<div class="md-form-group col-sm-12">
 								<h5 class="text-info">Select a Contact Group</h5>
 								<div>
-									<button ng-click="selectGroup({title: 'teachers'})" md-ink-ripple="" class="md-btn m-r-xs md-raised m-b btn-fw blue">Teachers<div class="md-ripple-container"></div></button>
+									<button ng-if = "user.type == 'school'" ng-click="selectGroup({title: 'teachers'})" md-ink-ripple="" class="md-btn m-r-xs md-raised m-b btn-fw blue">Teachers<div class="md-ripple-container"></div></button>
 									<button ng-click="selectGroup(v)" ng-repeat="(k, v) in groups" md-ink-ripple="" class="md-btn m-r-xs md-raised m-b btn-fw blue">{{v.title}}<div class="md-ripple-container"></div></button>
 								</div>
 							</div>

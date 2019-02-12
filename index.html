@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="styles/angular-material.css" type="text/css" />
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-    <link rel="stylesheet" href="styles/main.4b3a5b2d.css">
+    <link rel="stylesheet" href="styles/main.css">
   </head>
   <body ng-app="inditesmsApp">
     <!--[if lt IE 7]>
@@ -227,9 +227,22 @@
 
     <script src="scripts/jquery.js"></script>
     <script src="scripts/bootstrap.min.js"></script>
-    <script src="scripts/vendor.5431b545.js"></script>
+
+    <script src="scripts/vendor.db6553ea.js"></script>
 
         <script src="scripts/angular-material.js"></script>
-        <script src="scripts/scripts.fc76cb9b.js"></script>
+        <script>
+          // Initialize Firebase
+          var config = {
+            apiKey: "AIzaSyCkwxYHb-bb7ReqY-rb0998LIIza9IKMWg",
+            authDomain: "inditesms.firebaseapp.com",
+            databaseURL: "https://inditesms.firebaseio.com",
+            projectId: "inditesms",
+            storageBucket: "inditesms.appspot.com",
+            messagingSenderId: "229606557479"
+          };
+          firebase.initializeApp(config);
+        </script>
+        <script src="scripts/scripts.js"></script>
 </body>
 </html>

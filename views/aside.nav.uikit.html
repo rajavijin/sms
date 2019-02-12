@@ -4,7 +4,7 @@
       UI Kits
     </li> -->
     <li ui-sref-active="active" ng-repeat="link in menus">
-      <a ng-if="!link.sub" md-ink-ripple="" ng-href="#{{link.href}}">
+      <a ng-if="!link.sub" md-ink-ripple="" ng-href="#!{{link.href}}">
         <i class="icon i-20 {{link.class}}"></i>
         <span class="font-normal">{{link.title}}</span>
       </a>
@@ -18,7 +18,7 @@
       </a>
       <ul ng-if="link.sub" class="nav nav-sub">
         <li ui-sref-active="active" ng-repeat="sublink in link.sub">
-          <a md-ink-ripple="" href="#{{sublink.href}}">{{sublink.title}}</a>
+          <a md-ink-ripple="" href="#!{{sublink.href}}">{{sublink.title}}</a>
         </li>
       </ul>
     </li>
